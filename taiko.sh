@@ -19,9 +19,15 @@ if ! docker --version; then
                 sudo apt install docker-ce docker-ce-cli containerd.io -y
 fi
 
+# if ! docker-compose --version; then
+#                 docker_compose_version=`wget -qO- https://api.github.com/repos/docker/compose/releases/latest | jq -r ".tag_name"`
+#                 sudo wget -O /usr/bin/docker-compose "https://github.com/docker/compose/releases/download/${docker_compose_version}/docker-compose-`uname -s`-`uname -m`"
+#                 sudo chmod +x /usr/bin/docker-compose
+#                 . $HOME/.bash_profile
+# fi
+
 if ! docker-compose --version; then
-                docker_compose_version=`wget -qO- https://api.github.com/repos/docker/compose/releases/latest | jq -r ".tag_name"`
-                sudo wget -O /usr/bin/docker-compose "https://github.com/docker/compose/releases/download/${docker_compose_version}/docker-compose-`uname -s`-`uname -m`"
+                sudo wget -O /usr/bin/docker-compose "https://github.com/docker/compose/releases/download//docker-compose-Linux-x86_64"
                 sudo chmod +x /usr/bin/docker-compose
                 . $HOME/.bash_profile
 fi

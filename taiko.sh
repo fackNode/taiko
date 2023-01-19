@@ -28,14 +28,14 @@ if ! docker-compose --version; then
                 . $HOME/.bash_profile
 fi
 
-# if ! docker-compose --version; then
-#                 sudo wget -O /usr/bin/docker-compose "https://github.com/docker/compose/releases/download//docker-compose-Linux-x86_64"
-#                 sudo chmod +x /usr/bin/docker-compose
-#                 . $HOME/.bash_profile
-# fi
-
 echo -e "${fmt}\nInstalling node files / Устанавливаем файлы ноды${end}" && sleep 1
                 git clone https://github.com/taikoxyz/simple-taiko-node.git
                 wget -P $HOME/simple-taiko-node https://raw.githubusercontent.com/fackNode/taiko/main/.env
                 cd simple-taiko-node
                 docker-compose up -d
+
+if docker ps -a | grep -q 'simple-taiko-node-grafana-1' &&  docker ps -a | grep -q 'simple-taiko-node-taiko_client_proposer-1' &&  docker ps -a | grep -q 'simple-taiko-node-prometheus-1' &&  docker ps -a | grep -q 'simple-taiko-node-taiko_client_driver-1' &&  docker ps -a | grep -q 'simple-taiko-node-l2_execution_engine-1'; then
+              echo -e "${fmt}\nNode installed correctly / Нода установлена корректно${end}" && sleep 1
+else
+              echo -e "${err}\nNode installed incorrectly / Нода установлена некорректно${end}" && sleep 1
+fi

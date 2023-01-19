@@ -13,9 +13,9 @@ echo -e "${fmt}\nSetting up dependencies / Устанавливаем необх
                 sudo apt install curl ca-certificates curl gnupg lsb-release jq -y < "/dev/null"
 if ! docker --version; then
                 . /etc/*-release
-# if [ ! /usr/share/keyrings/docker-archive-keyring.gpg ]; then
+                rm /usr/share/keyrings/docker-archive-keyring.gpg
                 sudo wget -qO- "https://download.docker.com/linux/ubuntu/gpg" | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-# fi
+
                 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
                 sudo apt update
                 sudo apt install docker-ce docker-ce-cli containerd.io -y
@@ -29,9 +29,8 @@ if ! docker-compose --version; then
 fi
 
 echo -e "${fmt}\nInstalling node files / Устанавливаем файлы ноды${end}" && sleep 1
-if [ ! $HOME/simple-taiko-node ]; then
+                rm -rf simple-taiko-node
                 git clone https://github.com/taikoxyz/simple-taiko-node.git
-fi
                 wget -P $HOME/simple-taiko-node https://raw.githubusercontent.com/fackNode/taiko/main/.env
                 cd simple-taiko-node
                 docker-compose up -d

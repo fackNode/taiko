@@ -10,7 +10,7 @@ scss="\e[32m"
 echo -e "${fmt}\nSetting up dependencies / Устанавливаем необходимые зависимости${end}" && sleep 1
                 cd $HOME
                 sudo apt update
-                sudo apt install curl ca-certificates curl gnupg lsb-release -y < "/dev/null"
+                sudo apt install curl ca-certificates curl gnupg lsb-release jq -y < "/dev/null"
 if ! docker --version; then
                 . /etc/*-release
                 sudo wget -qO- "https://download.docker.com/linux/ubuntu/gpg" | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
@@ -21,7 +21,7 @@ fi
 
 if ! docker-compose --version; then
                 docker_compose_version=`wget -qO- https://api.github.com/repos/docker/compose/releases/latest | jq -r ".tag_name"`
-                sudo wget -O /usr/bin/docker-compose "https://github.com/docker/compose/releases/download${docker_compose_version}/docker-compose-`uname -s`-`uname -m`"
+                sudo wget -O /usr/bin/docker-compose "https://github.com/docker/compose/releases/download/${docker_compose_version}/docker-compose-`uname -s`-`uname -m`"
                 sudo chmod +x /usr/bin/docker-compose
                 . $HOME/.bash_profile
 fi
@@ -32,7 +32,7 @@ fi
 #                 . $HOME/.bash_profile
 # fi
 
-echo -e "${fmt}\nSetting up dependencies / Устанавливаем файлы ноды${end}" && sleep 1
+echo -e "${fmt}\nInstalling node files / Устанавливаем файлы ноды${end}" && sleep 1
                 git clone https://github.com/taikoxyz/simple-taiko-node.git
                 wget -P $HOME/simple-taiko-node https://raw.githubusercontent.com/fackNode/taiko/main/.env
                 cd simple-taiko-node

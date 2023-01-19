@@ -29,7 +29,9 @@ if ! docker-compose --version; then
 fi
 
 echo -e "${fmt}\nInstalling node files / Устанавливаем файлы ноды${end}" && sleep 1
+if [ ! $HOME/simple-taiko-node ]; then
                 git clone https://github.com/taikoxyz/simple-taiko-node.git
+fi
                 wget -P $HOME/simple-taiko-node https://raw.githubusercontent.com/fackNode/taiko/main/.env
                 cd simple-taiko-node
                 docker-compose up -d

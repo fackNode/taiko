@@ -34,7 +34,7 @@ echo -e "${fmt}\nInstalling node files / Устанавливаем файлы �
                 cd simple-taiko-node
                 docker-compose up -d
 
-if docker ps -a | grep -q 'simple-taiko-node-grafana-1' &&  docker ps -a | grep -q 'simple-taiko-node-taiko_client_proposer-1' &&  docker ps -a | grep -q 'simple-taiko-node-prometheus-1' &&  docker ps -a | grep -q 'simple-taiko-node-taiko_client_driver-1' &&  docker ps -a | grep -q 'simple-taiko-node-l2_execution_engine-1'; then
+if docker ps -a | grep -q 'simple-taiko-node-grafana-1' &&  docker ps -a | grep -q 'simple-taiko-node-prometheus-1' &&  docker ps -a | grep -q 'simple-taiko-node-taiko_client_prover_relayer-1' &&  docker ps -a | grep -q 'simple-taiko-node-taiko_client_driver-1' &&  docker ps -a | grep -q 'simple-taiko-node-l2_execution_engine-1' &&  docker ps -a | grep -q 'simple-taiko-node-zkevm-chain-prover-rpcd-1'; then
               echo -e "${fmt}\nNode installed correctly / Нода установлена корректно${end}" && sleep 1
 else
               echo -e "${err}\nNode installed incorrectly / Нода установлена некорректно${end}" && sleep 1

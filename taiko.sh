@@ -1,7 +1,5 @@
 #!/bin/bash
 
-curl -s "https://nodes.fackblock.com/api/logo.sh" | sh && sleep 2
-
 fmt=`tput setaf 45`
 end="\e[0m\n"
 err="\e[31m"
@@ -28,6 +26,9 @@ sed -i 's|L1_ENDPOINT_HTTP=.*|L1_ENDPOINT_HTTP='"$HTTPSendpoint"'|' .env
 sed -i 's|L1_ENDPOINT_WS=.*|L1_ENDPOINT_WS='"$WSSendpoint"'|' .env
 sed -i 's|L1_PROVER_PRIVATE_KEY=.*|L1_PROVER_PRIVATE_KEY='"$TAIKO_PRIVATE_KEY"'|' .env
 sed -i 's/ENABLE_PROVER=.*/ENABLE_PROVER=true/' .env
+sed -i 's/ENABLE_PROPOSER=.*/ENABLE_PROPOSER=true/' .env
+sed -i 's|L1_PROPOSER_PRIVATE_KEY=.*|L1_PROPOSER_PRIVATE_KEY='"$TAIKO_PRIVATE_KEY"'|' .env
+sed -i 's|L2_SUGGESTED_FEE_RECIPIENT=.*|L2_SUGGESTED_FEE_RECIPIENT='"$metamask_address"'|' .env
 
 docker-compose up -d
 
@@ -36,3 +37,5 @@ if docker ps -a | grep -q 'simple-taiko-node-grafana-1' &&  docker ps -a | grep 
 else
   echo -e "${err}\nNode installed incorrectly / Нода установлена некорректно${end}" && sleep 1
 fi
+
+rm $HOME/docker.sh
